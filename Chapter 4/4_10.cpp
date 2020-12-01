@@ -7,8 +7,7 @@ int main () {
 
 int i; 
 
-while (i != 42)
-    cin >> i;
+while (cin >> i && i != 42)
 
 return 0; 
 }
