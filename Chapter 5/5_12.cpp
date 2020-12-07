@@ -7,16 +7,16 @@ int main ()
 {
   char ch;
   std::vector<char> text;
-  int Cnt = 0;
+  int cnt = 0;
   while (std::cin >> std::noskipws >> ch)
     text.push_back(ch);
     
   for (std::size_t i = 0; i != text.size(); ++i)
   {
     if (text[i] == 'f' && ((text[i + 1] == 'f') || (text[i + 1] == 'l') || (text[i + 1] == 'i')))
-      ++Cnt;
+      ++cnt;
   }
-  std::cout << "Number of combinations:   \t" << Cnt << std::endl;
+  std::cout << "Number of combinations:   \t" << cnt << std::endl;
   
   return 0;
 }
