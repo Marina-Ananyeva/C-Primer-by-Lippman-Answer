@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cctype>
 
 template <typename T>
 int module(T a) 

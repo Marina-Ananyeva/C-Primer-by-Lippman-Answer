@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Chapter6.h"
 
 int fact(int a) 
 {
@@ -14,10 +15,4 @@ void factorial_cout()
   int a;
   std::cin >> a;
   std::cout << "The " << a << "! is " << fact(a) << "." << std::endl;
-}
-
-int main () 
-{
-  factorial_cout();
-  return 0;
 }
