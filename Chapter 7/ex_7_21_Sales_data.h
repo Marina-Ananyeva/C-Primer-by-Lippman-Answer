@@ -11,8 +11,8 @@ class Sales_data
   friend std::istream &read(std::istream &, Sales_data &);
 
   public:
-   Sales_data() = default;
-   Sa les_data(const std::string &s) : bookNo(s) {}
+    Sales_data() = default;
+    Sales_data(const std::string &s) : bookNo(s) {}
     Sales_data(const std::string &s, unsigned n, double p) : bookNo(), units_sold(), revenue(p*n) {}
     Sales_da (std::istream &);
     std::string isbn() const { return bookNo; }
