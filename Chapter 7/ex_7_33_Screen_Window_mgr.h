@@ -1,13 +1,25 @@
-#ifndef SCREEN_H
-#define SCREEN_H
+#ifndef EX_7_32_SCREEN_WINDOW_MGR_H
+#define EX_7_32_SCREEN_WINDOW_MGR_H
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-class Screen
+class Screen;
+
+class Window_mgr
 {
-  friend class Window_mgr;
+  public:
+    using ScreenIndex = std::vector<Screen>::size_type;
+    void clear(ScreenIndex);
+
+  private:
+    std::vector<Screen> screens;
+};
+
+class Screen 
+{
+  friend void Window_mgr::clear(ScreenIndex);
 
 public:
   void some_member() const;
@@ -20,6 +32,7 @@ public:
   Screen() = default;
   Screen(pos ht, pos wd, char c) : height(ht), width(wd), contents(ht * wd, c) {}
   Screen(pos ht, pos wd, std::string s);
+
   char get() const { return contents[cursor]; };
   inline char get(pos ht, pos wd) const;
   Screen &move(pos r, pos c);
@@ -33,7 +46,7 @@ public:
   const Screen &display(std::ostream &os) const 
   {
     do_display(os);
-    return *this; 
+    return *this;
   }
 
   private:
@@ -46,6 +59,17 @@ public:
     std::string contents; //screen's contents
 };
 
+Screen::pos Screen::size() const
+{
+  return height * width;
+}
+
+inline void Window_mgr::clear(ScreenIndex i)
+{
+  Screen &s = screens[i];
+  s.contents = std::string(s.height * s.width, ' ');
+}
+
 Screen::Screen(pos ht, pos wd, std::string s) : height(ht), width(wd), contents(s)
 {
   int space_cnt = 0;
@@ -53,12 +77,6 @@ Screen::Screen(pos ht, pos wd, std::string s) : height(ht), width(wd), contents(
   for (int i = 0; i < space_cnt; ++i)
     s[i] = ' ';
 }
-
-Screen::pos Screen::size() const
-{
-  return height * width;
-}
-
 void Screen::some_member() const
 {
   ++access_ctr;
